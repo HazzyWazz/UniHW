@@ -14,15 +14,7 @@ fn prompt() -> Result<String> {
 	Ok(input.trim().to_string())
 }
 
-fn main() {
-	let x: i32 = prompt().expect("Invalid value!").parse().expect("Invalid value!");
-	let y: i32 = prompt().expect("Invalid value!").parse().expect("Invalid value!");
-	let z: i32 = prompt().expect("Invalid value!").parse().expect("Invalid value!");
-
-	// let x_abs = x.abs();
-	// let y_abs = y.abs();
-	// let z_abs = z.abs();
-
+fn max(x: i32, y: i32, z: i32) -> i32 {
 	let mut max = x;
 
 	if y.abs() > max.abs() {
@@ -35,7 +27,21 @@ fn main() {
 	} else if z.abs() == max.abs() && z > max {
 		max = z;
 	}
-	println!("{}", max);
+
+	max
+}
+
+
+fn main() {
+	let x: i32 = prompt().expect("Invalid value!").parse().expect("Invalid value!");
+	let y: i32 = prompt().expect("Invalid value!").parse().expect("Invalid value!");
+	let z: i32 = prompt().expect("Invalid value!").parse().expect("Invalid value!");
+
+	// let x_abs = x.abs();
+	// let y_abs = y.abs();
+	// let z_abs = z.abs();
+	
+	println!("{}", max(x, y, z));
 
 	/*
 	A lenti kód hibás
@@ -66,3 +72,17 @@ fn main() {
 	// 	}
 	// }
 }
+#[cfg(test)]
+#[test]
+fn test() {
+	assert_eq!(max(1, 2, 3), 3);
+	assert_eq!(max(-1, -2, -3), -3);
+	assert_eq!(max(-1, -2, 3), 3);
+	assert_eq!(max(-1, -2, 2), 2);
+	assert_eq!(max(-1, 2, -2), 2);
+	assert_eq!(max(-57, 57, -100), -100);
+	assert_eq!(max(-57, 57, -100), -100);
+	assert_eq!(max(-57, 57, 1), 57);
+	assert_eq!(max(57, -57, 1), 57);
+}
+
